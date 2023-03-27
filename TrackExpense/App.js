@@ -1,6 +1,8 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
+import {Provider} from 'react-redux';
+import store from './Redux/store';
 
 import {Home} from './screens';
 
@@ -14,18 +16,20 @@ const theme = {
 
 const Stack = createStackNavigator();
 
-const App = () => {
+function App() {
   return (
-    <NavigationContainer theme={theme}>
-      <Stack.Navigator
-        screenOptions={{
-          headerShown: false,
-        }}
-        initialRouteName={'Home'}>
-        <Stack.Screen name="Home" component={Home} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer theme={theme}>
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+          }}
+          initialRouteName={'Home'}>
+          <Stack.Screen name="Home" component={Home} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
-};
+}
 
 export default App;
