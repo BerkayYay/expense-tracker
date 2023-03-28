@@ -11,6 +11,7 @@ import {
 import {COLORS, FONTS, SIZES, icons} from '../../constants';
 import {useDispatch, useSelector} from 'react-redux';
 import {setSelectedCategory, setShowMoreToggle} from '../../Redux/reducers';
+import styles from './categoryList.style';
 
 const renderCategoryList = () => {
   const dispatch = useDispatch();
@@ -23,39 +24,19 @@ const renderCategoryList = () => {
   const renderItem = ({item}) => {
     return (
       <TouchableOpacity
-        style={{
-          flex: 1,
-          flexDirection: 'row',
-          margin: 5,
-          paddingHorizontal: SIZES.padding,
-          paddingVertical: SIZES.radius,
-          borderRadius: 5,
-          backgroundColor: COLORS.white,
-          ...styles.shadow,
-        }}
+        style={styles.itemContainer}
         onPress={() => dispatch(setSelectedCategory(item))}>
         <Image
           source={item.icon}
-          style={{
-            width: 20,
-            height: 20,
-            tintColor: item.color,
-          }}
+          style={[styles.itemImage, {tintColor: item.color}]}
         />
-        <Text
-          style={{
-            marginLeft: SIZES.base,
-            color: COLORS.primary,
-            ...FONTS.h4,
-          }}>
-          {item.name}
-        </Text>
+        <Text style={styles.itemText}>{item.name}</Text>
       </TouchableOpacity>
     );
   };
 
   return (
-    <View style={{paddingHorizontal: SIZES.padding - 5}}>
+    <View style={styles.categoryContainer}>
       <Animated.View style={{height: categoryListHeightAnimationValue}}>
         <FlatList
           data={categories}
@@ -66,11 +47,7 @@ const renderCategoryList = () => {
       </Animated.View>
 
       <TouchableOpacity
-        style={{
-          flexDirection: 'row',
-          marginTop: SIZES.padding,
-          justifyContent: 'center',
-        }}
+        style={styles.categoryList}
         onPress={() => {
           if (showMoreToggle) {
             Animated.timing(categoryListHeightAnimationValue, {
@@ -88,32 +65,16 @@ const renderCategoryList = () => {
 
           dispatch(setShowMoreToggle(!showMoreToggle));
         }}>
-        <Text style={{...FONTS.body4}}>{showMoreToggle ? 'LESS' : 'MORE'}</Text>
+        <Text style={styles.categoryListText}>
+          {showMoreToggle ? 'LESS' : 'MORE'}
+        </Text>
         <Image
           source={showMoreToggle ? icons.up_arrow : icons.down_arrow}
-          style={{
-            marginLeft: 5,
-            width: 15,
-            height: 15,
-            alignSelf: 'center',
-          }}
+          style={styles.categoryListImage}
         />
       </TouchableOpacity>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  shadow: {
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 2,
-      height: 3,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 2,
-  },
-});
 
 export default renderCategoryList;

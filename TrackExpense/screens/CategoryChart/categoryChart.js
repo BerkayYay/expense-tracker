@@ -1,12 +1,15 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import {COLORS, FONTS, SIZES, icons} from '../../constants';
 import {
   processCategoryDataToDisplay,
   setSelectedCategoryByName,
 } from '../../helpers/categoryFunctions';
+import {useSelector} from 'react-redux';
+import {VictoryPie} from 'victory-native';
 
 const renderChart = () => {
+  const selectedCategory = useSelector(state => state.selectedCategory);
   let chartData = processCategoryDataToDisplay();
   let colorScales = chartData.map(item => item.color);
   let totalExpenseCount = chartData.reduce(
@@ -61,5 +64,18 @@ const renderChart = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  shadow: {
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 2,
+      height: 3,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 2,
+  },
+});
 
 export default renderChart;

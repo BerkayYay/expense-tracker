@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 
 import {COLORS, FONTS, SIZES, icons} from '../../constants';
+import styles from './categoryHeader.style';
 
 import {useDispatch, useSelector} from 'react-redux';
 import {setViewMode} from '../../Redux/reducers';
@@ -12,65 +13,44 @@ const renderCategoryHeaderSection = () => {
   const viewMode = useSelector(state => state.viewMode);
 
   return (
-    <View
-      style={{
-        flexDirection: 'row',
-        padding: SIZES.padding,
-        justifyContent: 'space-between',
-        alignItems: 'center',
-      }}>
+    <View style={styles.headerContainer}>
       {/* Title */}
       <View>
-        <Text style={{color: COLORS.primary, ...FONTS.h3}}>CATEGORIES</Text>
-        <Text style={{color: COLORS.darkgray, ...FONTS.body4}}>
-          {categories.length} Total
-        </Text>
+        <Text style={styles.headerTitleText1}>CATEGORIES</Text>
+        <Text style={styles.headerTitleText2}>{categories.length} Total</Text>
       </View>
 
       {/* Buttons */}
-      <View
-        style={{
-          flexDirection: 'row',
-        }}>
+      <View style={styles.headerButtonContainer}>
         <TouchableOpacity
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            width: 50,
-            height: 50,
-            backgroundColor: viewMode == 'chart' ? COLORS.secondary : null,
-            borderRadius: 25,
-          }}
+          style={[
+            styles.headerChartButton,
+            {backgroundColor: viewMode == 'chart' ? COLORS.secondary : null},
+          ]}
           onPress={() => dispatch(setViewMode('chart'))}>
           <Image
             source={icons.chart}
             resizeMode="contain"
-            style={{
-              width: 20,
-              height: 20,
-              tintColor: viewMode == 'chart' ? COLORS.white : COLORS.darkgray,
-            }}
+            style={[
+              styles.headerChartButtonImage,
+              {tintColor: viewMode == 'chart' ? COLORS.white : COLORS.darkgray},
+            ]}
           />
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            width: 50,
-            height: 50,
-            backgroundColor: viewMode == 'list' ? COLORS.secondary : null,
-            borderRadius: 25,
-          }}
+          style={[
+            styles.headerListButton,
+            {backgroundColor: viewMode == 'list' ? COLORS.secondary : null},
+          ]}
           onPress={() => dispatch(setViewMode('list'))}>
           <Image
             source={icons.menu}
             resizeMode="contain"
-            style={{
-              width: 20,
-              height: 20,
-              tintColor: viewMode == 'list' ? COLORS.white : COLORS.darkgray,
-            }}
+            style={[
+              styles.headerListButtonImage,
+              {tintColor: viewMode == 'list' ? COLORS.white : COLORS.darkgray},
+            ]}
           />
         </TouchableOpacity>
       </View>

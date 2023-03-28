@@ -2,49 +2,21 @@ import React from 'react';
 import {View, TouchableOpacity, Image} from 'react-native';
 
 import {COLORS, FONTS, SIZES, icons} from '../../constants';
+import styles from './navbar.style';
 
 const renderNavBar = () => {
   return (
-    <View
-      style={{
-        flexDirection: 'row',
-        height: 80,
-        justifyContent: 'space-between',
-        alignItems: 'flex-end',
-        paddingHorizontal: SIZES.padding,
-        backgroundColor: COLORS.white,
-      }}>
+    <View style={styles.navbarContainer}>
       <TouchableOpacity
-        style={{
-          justifyContent: 'center',
-          width: 50,
-        }}
+        style={styles.navbarBackImageContainer}
         onPress={() => console.log('Menu on Pressed')}>
-        <Image
-          source={icons.back_arrow}
-          style={{
-            width: 30,
-            height: 30,
-            tintColor: COLORS.primary,
-          }}
-        />
+        <Image source={icons.back_arrow} style={styles.navbarBackImage} />
       </TouchableOpacity>
 
       <TouchableOpacity
-        style={{
-          justifyContent: 'center',
-          alignItems: 'flex-end',
-          width: 50,
-        }}
+        style={styles.navbarMoreImageContainer}
         onPress={() => console.log('More on Pressed')}>
-        <Image
-          source={icons.more}
-          style={{
-            width: 30,
-            height: 30,
-            tintColor: COLORS.primary,
-          }}
-        />
+        <Image source={icons.more} style={styles.navbarMoreImage} />
       </TouchableOpacity>
     </View>
   );

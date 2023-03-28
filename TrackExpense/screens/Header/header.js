@@ -2,52 +2,23 @@ import React from 'react';
 import {View, Text, Image} from 'react-native';
 
 import {COLORS, FONTS, SIZES, icons} from '../../constants';
+import styles from './header.style';
 
 const renderHeader = () => {
   return (
-    <View
-      style={{
-        paddingHorizontal: SIZES.padding,
-        paddingVertical: SIZES.padding,
-        backgroundColor: COLORS.white,
-      }}>
+    <View style={styles.headerContainer}>
       <View>
-        <Text style={{color: COLORS.primary, ...FONTS.h2}}>My Expenses</Text>
-        <Text style={{color: COLORS.darkgray, ...FONTS.h3}}>
-          Summary (private)
-        </Text>
+        <Text style={styles.headerTitleText1}>My Expenses</Text>
+        <Text style={styles.headerTitleText2}>Summary (private)</Text>
       </View>
 
-      <View
-        style={{
-          flexDirection: 'row',
-          marginTop: SIZES.padding,
-          alignItems: 'center',
-        }}>
-        <View
-          style={{
-            width: 50,
-            height: 50,
-            backgroundColor: COLORS.lightGray,
-            borderRadius: 25,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-          <Image
-            source={icons.calendar}
-            style={{
-              width: 20,
-              height: 20,
-              tintColor: COLORS.lightBlue,
-            }}
-          />
+      <View style={styles.headerContainer2}>
+        <View style={styles.headerContainer2ImageContainer}>
+          <Image source={icons.calendar} style={styles.headerContainer2Image} />
         </View>
-        <View
-          style={{
-            marginLeft: SIZES.padding,
-          }}>
-          <Text style={{color: COLORS.primary, ...FONTS.h3}}>Nov 1, 2020</Text>
-          <Text style={{color: COLORS.darkgray, ...FONTS.body3}}>
+        <View style={styles.headerContainer2TextContainer}>
+          <Text style={styles.headerContainer2Text1}>Nov 1, 2020</Text>
+          <Text style={styles.headerContainer2Text2}>
             %18 more than last month
           </Text>
         </View>
